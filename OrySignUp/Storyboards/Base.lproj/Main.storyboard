@@ -3,7 +3,6 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -35,19 +34,6 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="QTS-WV-sHY">
                                                         <rect key="frame" x="0.0" y="0.0" width="361" height="653"/>
                                                     </stackView>
-                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IBi-eK-OrL">
-                                                        <rect key="frame" x="0.0" y="0.0" width="361" height="52"/>
-                                                        <color key="backgroundColor" name="AccentColor"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="52" id="wbP-NL-lUS"/>
-                                                        </constraints>
-                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="Log In"/>
-                                                        <connections>
-                                                            <action selector="signInButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="l2E-42-78o"/>
-                                                        </connections>
-                                                    </button>
                                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eBF-71-Q4O">
                                                         <rect key="frame" x="0.0" y="0.0" width="361" height="34"/>
                                                         <constraints>
@@ -99,7 +85,6 @@
                     <connections>
                         <outlet property="activityIndicator" destination="xNJ-RU-BBy" id="Ui3-z2-Ved"/>
                         <outlet property="elementsStackView" destination="QTS-WV-sHY" id="oMN-Y5-F7X"/>
-                        <outlet property="signInButton" destination="IBi-eK-OrL" id="D9R-oI-dqU"/>
                         <outlet property="signInLabel" destination="Ack-d5-Dhx" id="6h1-52-Pa7"/>
                         <outlet property="signUpButton" destination="eBF-71-Q4O" id="Fg7-Vz-FvU"/>
                     </connections>
@@ -134,19 +119,6 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="2mY-Mo-YOA">
                                                         <rect key="frame" x="0.0" y="0.0" width="361" height="652"/>
                                                     </stackView>
-                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zem-z7-0ub">
-                                                        <rect key="frame" x="0.0" y="0.0" width="361" height="52"/>
-                                                        <color key="backgroundColor" name="AccentColor"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="52" id="Dtk-6C-V5i"/>
-                                                        </constraints>
-                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="Sign Up"/>
-                                                        <connections>
-                                                            <action selector="signUpButtonPressed:" destination="jc1-V1-uvy" eventType="touchUpInside" id="ZnL-Me-817"/>
-                                                        </connections>
-                                                    </button>
                                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rup-zL-nlb">
                                                         <rect key="frame" x="0.0" y="0.0" width="361" height="34"/>
                                                         <constraints>
@@ -198,7 +170,6 @@
                         <outlet property="activityIndicator" destination="HMV-gb-bHP" id="T5v-ar-xge"/>
                         <outlet property="elementsStackView" destination="2mY-Mo-YOA" id="2oo-Po-XdR"/>
                         <outlet property="signInButton" destination="Rup-zL-nlb" id="H6F-ux-ZL9"/>
-                        <outlet property="signUpButton" destination="zem-z7-0ub" id="yLZ-tX-7zC"/>
                         <outlet property="signUpLabel" destination="icm-LC-4eB" id="GIb-Nr-9Iu"/>
                     </connections>
                 </viewController>
@@ -302,9 +273,6 @@
         <image name="house.fill" catalog="system" width="128" height="104"/>
         <image name="person" catalog="system" width="128" height="121"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
-        <namedColor name="AccentColor">
-            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

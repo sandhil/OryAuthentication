@@ -7,15 +7,9 @@ class SignInViewController: UIViewController {
     
     @IBOutlet weak var elementsStackView: UIStackView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var signInLabel: UILabel!
     
-    
-    @IBAction func signInButtonPressed(_ sender: Any) {
-        activityIndicator.startAnimating()
-        getValuesFromFormFields()
-    }
     
     @IBAction func signUpButtonPressed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -42,10 +36,12 @@ class SignInViewController: UIViewController {
             switch node?.attributes?.type {
             case .email,.text, .password :
                 addTextField(node: node)
+            case .submit:
+                addSubmitButton(node: node)
             default: break
             }
         }
-        signInButton.isHidden = false
+        
         signUpButton.isHidden = false
         signInLabel.isHidden = false
     }
@@ -58,6 +54,29 @@ class SignInViewController: UIViewController {
         textField.isSecureTextEntry = node?.attributes?.type == .password
         textField.tag = node?.meta?.label?.tag ?? -1
         elementsStackView.addArrangedSubview(textField)
+        NSLayoutConstraint.activate([
+            textField.heightAnchor.constraint(equalToConstant: 40)
+        ])
+    }
+    
+    private func addSubmitButton(node: Node?) {
+        let button = UIButton()
+        button.setTitle(node?.meta?.label?.text, for: .normal)
+        button.backgroundColor = UIColor(named: "AccentColor")
+        button.tag = node?.meta?.label?.tag ?? -1
+        button.layer.cornerRadius = 8
+        elementsStackView.addArrangedSubview(button)
+        
+        NSLayoutConstraint.activate([
+          button.heightAnchor.constraint(equalToConstant: 40)
+        ])
+        
+        button.addTarget(self, action: #selector(submitButtonPressed(_:)), for: .touchUpInside)
+    }
+    
+    @objc func submitButtonPressed(_ sender: UIButton) {
+        activityIndicator.startAnimating()
+        getValuesFromFormFields()
     }
     
     private func getValuesFromFormFields() {

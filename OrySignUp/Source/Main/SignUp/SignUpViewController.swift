@@ -6,15 +6,9 @@ class SignUpViewController: UIViewController {
     var viewModel: SignUpViewModel = SignUpViewModel()
     
     @IBOutlet weak var elementsStackView: UIStackView!
-    @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var signUpLabel: UILabel!
-    
-    @IBAction func signUpButtonPressed(_ sender: Any) {
-        activityIndicator.startAnimating()
-        getValuesFromFormFields()
-    }
     
     @IBAction func signInButtonPressed(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
@@ -41,11 +35,13 @@ class SignUpViewController: UIViewController {
                 addTextField(node: node)
             case .checkbox:
                 addCheckBox(node: node)
+            case .submit:
+                addSubmitButton(node: node)
             default: break
             }
         }
         signInButton.isHidden = false
-        signUpButton.isHidden = false
+//        signUpButton.isHidden = false
         signUpLabel.isHidden = false
     }
     
@@ -57,6 +53,9 @@ class SignUpViewController: UIViewController {
         textField.isSecureTextEntry = node?.attributes?.type == .password
         textField.tag = node?.meta?.label?.tag ?? -1
         elementsStackView.addArrangedSubview(textField)
+        NSLayoutConstraint.activate([
+            textField.heightAnchor.constraint(equalToConstant: 40)
+        ])
     }
     
     private func addCheckBox(node: Node?) {
@@ -77,6 +76,26 @@ class SignUpViewController: UIViewController {
         horizontalStackView.addArrangedSubview(label)
         
         elementsStackView.addArrangedSubview(horizontalStackView)
+    }
+    
+    private func addSubmitButton(node: Node?) {
+        let button = UIButton()
+        button.setTitle(node?.meta?.label?.text, for: .normal)
+        button.backgroundColor = UIColor(named: "AccentColor")
+        button.tag = node?.meta?.label?.tag ?? -1
+        button.layer.cornerRadius = 8
+        elementsStackView.addArrangedSubview(button)
+        
+        NSLayoutConstraint.activate([
+          button.heightAnchor.constraint(equalToConstant: 40)
+        ])
+        
+        button.addTarget(self, action: #selector(submitButtonPressed(_:)), for: .touchUpInside)
+    }
+    
+    @objc func submitButtonPressed(_ sender: UIButton) {
+        activityIndicator.startAnimating()
+        getValuesFromFormFields()
     }
     
     private func getValuesFromFormFields() {

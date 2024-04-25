@@ -42,4 +42,39 @@ class SignUpViewModel {
             })
             .disposed(by: disposeBag)
     }
+    
+    func handleTextualField(components: [String], text: String, traits: inout [String: Any]) {
+        if components.count > 2 {
+            let key = components[1]
+            let lastKey = components[2]
+            createNestedDictionary(key: key, lastKey: lastKey, value: text, in: &traits)
+        } else if components.count == 2 {
+            let key = components[1]
+            traits[key] = text
+        } else if components.count == 1 {
+            let key = components[0]
+            traits[key] = text
+        }
+    }
+    
+    func handleCheckbox(components: [String], uiSwitch: UISwitch, traits: inout [String: Any]) {
+        if components.count == 2 {
+            let key = components[1]
+            traits[key] = uiSwitch.isOn
+        } else if components.count == 1 {
+            let key = components[0]
+            traits[key] = uiSwitch.isOn
+        }
+    }
+    
+    func createNestedDictionary(key: String, lastKey: String, value: Any, in dictionary: inout [String: Any]) {
+        if dictionary.keys.contains(key) {
+            var newDict = dictionary[key] as? [String: Any] ?? [:]
+            newDict[lastKey] = value
+            dictionary[key] = newDict
+        } else {
+            let dict = [lastKey: value]
+            dictionary[key] = dict
+        }
+    }
 }

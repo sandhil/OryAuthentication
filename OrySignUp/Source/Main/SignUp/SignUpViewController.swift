@@ -3,13 +3,13 @@ import UIKit
 
 class SignUpViewController: UIViewController {
     
+    var viewModel: SignUpViewModel = SignUpViewModel()
+    
     @IBOutlet weak var elementsStackView: UIStackView!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var signUpLabel: UILabel!
-    
-    var viewModel: SignUpViewModel = SignUpViewModel()
     
     @IBAction func signUpButtonPressed(_ sender: Any) {
         activityIndicator.startAnimating()
@@ -34,7 +34,7 @@ class SignUpViewController: UIViewController {
         self.navigationController?.present(tabbarController, animated: false)
     }
     
-    func renderUIElements() {
+    private func renderUIElements() {
         viewModel.jsonFlow?.ui?.nodes?.forEach { node in
             switch node?.attributes?.type {
             case .email,.text, .password :
@@ -49,7 +49,7 @@ class SignUpViewController: UIViewController {
         signUpLabel.isHidden = false
     }
     
-    func addTextField(node: Node?) {
+    private func addTextField(node: Node?) {
         let textField = UITextField()
         textField.placeholder = node?.meta?.label?.text
         textField.borderStyle = .roundedRect
@@ -59,7 +59,7 @@ class SignUpViewController: UIViewController {
         elementsStackView.addArrangedSubview(textField)
     }
     
-    func addCheckBox(node: Node?) {
+    private func addCheckBox(node: Node?) {
         
         let horizontalStackView = UIStackView()
         horizontalStackView.axis = .horizontal
@@ -79,7 +79,7 @@ class SignUpViewController: UIViewController {
         elementsStackView.addArrangedSubview(horizontalStackView)
     }
     
-    func getValuesFromFormFields() {
+    private func getValuesFromFormFields() {
         var payload: [String: Any] = [:]
         var traits: [String: Any] = [:]
         
@@ -95,11 +95,11 @@ class SignUpViewController: UIViewController {
             case .email, .text:
                 guard let textField = elementsStackView.viewWithTag(node?.meta?.label?.tag ?? -999) as? UITextField else { return }
                 let text = textField.text ?? ""
-                handleTextualField(components: components, text: text, traits: &traits)
+                viewModel.handleTextualField(components: components, text: text, traits: &traits)
                 
             case .checkbox:
                 guard let uiSwitch = elementsStackView.viewWithTag(node?.meta?.label?.tag ?? -99) as? UISwitch else { return }
-                handleCheckbox(components: components, uiSwitch: uiSwitch, traits: &traits)
+                viewModel.handleCheckbox(components: components, uiSwitch: uiSwitch, traits: &traits)
                 
             default: break
             }
@@ -110,41 +110,7 @@ class SignUpViewController: UIViewController {
         payload["method"] = "password"
         viewModel.signUp(parameters: payload)
     }
-    
-    func handleTextualField(components: [String], text: String, traits: inout [String: Any]) {
-        if components.count > 2 {
-            let key = components[1]
-            let lastKey = components[2]
-            createNestedDictionary(key: key, lastKey: lastKey, value: text, in: &traits)
-        } else if components.count == 2 {
-            let key = components[1]
-            traits[key] = text
-        } else if components.count == 1 {
-            let key = components[0]
-            traits[key] = text
-        }
-    }
-    
-    func handleCheckbox(components: [String], uiSwitch: UISwitch, traits: inout [String: Any]) {
-        if components.count == 2 {
-            let key = components[1]
-            traits[key] = uiSwitch.isOn
-        } else if components.count == 1 {
-            let key = components[0]
-            traits[key] = uiSwitch.isOn
-        }
-    }
-    
-    func createNestedDictionary(key: String, lastKey: String, value: Any, in dictionary: inout [String: Any]) {
-        if dictionary.keys.contains(key) {
-            var newDict = dictionary[key] as? [String: Any] ?? [:]
-            newDict[lastKey] = value
-            dictionary[key] = newDict
-        } else {
-            let dict = [lastKey: value]
-            dictionary[key] = dict
-        }
-    }
+
 }
 
 

@@ -5,7 +5,6 @@ class SignInViewController: UIViewController {
     
     var viewModel: SignInViewModel = SignInViewModel()
     
-    
     @IBOutlet weak var elementsStackView: UIStackView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var signInButton: UIButton!
@@ -38,7 +37,7 @@ class SignInViewController: UIViewController {
         self.navigationController?.present(tabbarController, animated: false)
     }
     
-    func renderUIElementsFromJSONSchema() {
+    private func renderUIElementsFromJSONSchema() {
         viewModel.jsonFlow?.ui?.nodes?.forEach { node in
             switch node?.attributes?.type {
             case .email,.text, .password :
@@ -51,7 +50,7 @@ class SignInViewController: UIViewController {
         signInLabel.isHidden = false
     }
     
-    func addTextField(node: Node?) {
+    private func addTextField(node: Node?) {
         let textField = UITextField()
         textField.placeholder = node?.meta?.label?.text
         textField.borderStyle = .roundedRect
@@ -61,7 +60,7 @@ class SignInViewController: UIViewController {
         elementsStackView.addArrangedSubview(textField)
     }
     
-    func getValuesFromFormFields() {
+    private func getValuesFromFormFields() {
         var payload: [String: Any] = [:]
         
         viewModel.jsonFlow?.ui?.nodes?.forEach { node in

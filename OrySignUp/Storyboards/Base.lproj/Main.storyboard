@@ -53,7 +53,6 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="34" id="Tr5-Sq-Dhk"/>
                                                         </constraints>
-                                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="Don't have an account? Sign Up"/>
                                                         <connections>
@@ -153,7 +152,6 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="34" id="jzw-L9-eLT"/>
                                                         </constraints>
-                                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="Already have an account? Sign In"/>
                                                         <connections>
@@ -217,8 +215,6 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Uhv-2x-8rh">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="selectedImageTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="y0u-lQ-G0g" kind="relationship" relationship="viewControllers" id="zcK-4V-knv"/>
@@ -233,9 +229,7 @@
         <scene sceneID="PLC-fz-ycz">
             <objects>
                 <navigationController modalPresentationStyle="fullScreen" navigationBarHidden="YES" id="y0u-lQ-G0g" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" selectedImage="house.fill" id="Hvm-xr-RFm">
-                        <color key="badgeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" selectedImage="house.fill" id="Hvm-xr-RFm"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="eud-S3-lze">
                         <autoresizingMask key="autoresizingMask"/>
@@ -262,9 +256,7 @@
         <scene sceneID="ioq-7W-TYH">
             <objects>
                 <navigationController modalPresentationStyle="fullScreen" navigationBarHidden="YES" id="3cN-MI-T72" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" image="person" catalog="system" selectedImage="person.fill" id="06S-0Z-BC3">
-                        <color key="badgeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Profile" image="person" catalog="system" selectedImage="person.fill" id="06S-0Z-BC3"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="n87-Av-Fvb">
                         <autoresizingMask key="autoresizingMask"/>

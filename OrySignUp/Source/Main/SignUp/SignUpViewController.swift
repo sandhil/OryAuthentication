@@ -52,7 +52,11 @@ class SignUpViewController: UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.isSecureTextEntry = node?.attributes?.type == .password
         textField.tag = node?.meta?.label?.tag ?? -1
+        if node?.attributes?.type == .number {
+            textField.keyboardType = .numberPad
+        }
         elementsStackView.addArrangedSubview(textField)
+        
         NSLayoutConstraint.activate([
             textField.heightAnchor.constraint(equalToConstant: 40)
         ])
@@ -113,9 +117,14 @@ class SignUpViewController: UIViewController {
                 payload["password"] = password
             case .email, .text, .number:
                 guard let textField = elementsStackView.viewWithTag(node?.meta?.label?.tag ?? -999) as? UITextField else { return }
-                let text = textField.text ?? ""
-                viewModel.handleTextualField(components: components, text: text, traits: &traits)
-                
+                if node?.attributes?.type == .number {
+                    let number = Int(textField.text ?? "0") ?? 0
+                    viewModel.handleNumericField(components: components, number: number, traits: &traits)
+                } else {
+                    let text = textField.text ?? ""
+                    viewModel.handleTextualField(components: components, text: text, traits: &traits)
+                }
+               
             case .checkbox:
                 guard let uiSwitch = elementsStackView.viewWithTag(node?.meta?.label?.tag ?? -99) as? UISwitch else { return }
                 viewModel.handleCheckbox(components: components, uiSwitch: uiSwitch, traits: &traits)

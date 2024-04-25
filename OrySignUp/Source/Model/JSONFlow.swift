@@ -49,16 +49,16 @@ struct Label: Codable {
     var tag: Int?
     
     private enum CodingKeys: String, CodingKey {
-       case text, id
-     }
-
-     init(from decoder: Decoder) throws {
-       let container = try decoder.container(keyedBy: CodingKeys.self)
-       text = try container.decodeIfPresent(String.self, forKey: .text)
-       id = try container.decodeIfPresent(Int.self, forKey: .id)
-       // Add a random tag during decoding
-       tag = Int.random(in: 10000...100000)
-     }
+        case text, id
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        text = try container.decodeIfPresent(String.self, forKey: .text)
+        id = try container.decodeIfPresent(Int.self, forKey: .id)
+        // Add a random tag during decoding
+        tag = Int.random(in: 10000...100000)
+    }
 }
 
 struct OrySession : Codable {
@@ -74,6 +74,12 @@ enum AttributeType: String, Codable {
     case number = "number"
     case checkbox = "checkbox"
     case submit = "submit"
+    case unknown
+    
+    init(from decoder: Decoder) throws {
+        let stringValue = try decoder.singleValueContainer().decode(String.self)
+        self = AttributeType(rawValue: stringValue) ?? .unknown
+    }
 }
 
 

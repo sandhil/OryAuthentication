@@ -34,7 +34,7 @@ class SignInViewController: UIViewController {
     private func renderUIElementsFromJSONSchema() {
         viewModel.jsonFlow?.ui?.nodes?.forEach { node in
             switch node?.attributes?.type {
-            case .email,.text, .password, .number :
+            case .email,.text, .password, .number:
                 addTextField(node: node)
             case .submit:
                 addSubmitButton(node: node)
@@ -68,7 +68,7 @@ class SignInViewController: UIViewController {
         elementsStackView.addArrangedSubview(button)
         
         NSLayoutConstraint.activate([
-          button.heightAnchor.constraint(equalToConstant: 40)
+            button.heightAnchor.constraint(equalToConstant: 40)
         ])
         
         button.addTarget(self, action: #selector(submitButtonPressed(_:)), for: .touchUpInside)

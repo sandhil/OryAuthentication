@@ -58,6 +58,20 @@ class SignUpViewModel {
         }
     }
     
+    func handleNumericField(components: [String], number: Int, traits: inout [String: Any]) {
+        if components.count > 2 {
+            let key = components[1]
+            let lastKey = components[2]
+            createNestedDictionary(key: key, lastKey: lastKey, value: number, in: &traits)
+        } else if components.count == 2 {
+            let key = components[1]
+            traits[key] = number
+        } else if components.count == 1 {
+            let key = components[0]
+            traits[key] = number
+        }
+    }
+    
     func handleCheckbox(components: [String], uiSwitch: UISwitch, traits: inout [String: Any]) {
         if components.count == 2 {
             let key = components[1]

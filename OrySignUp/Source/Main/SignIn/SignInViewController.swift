@@ -34,7 +34,7 @@ class SignInViewController: UIViewController {
     private func renderUIElementsFromJSONSchema() {
         viewModel.jsonFlow?.ui?.nodes?.forEach { node in
             switch node?.attributes?.type {
-            case .email,.text, .password :
+            case .email,.text, .password, .number :
                 addTextField(node: node)
             case .submit:
                 addSubmitButton(node: node)
@@ -88,7 +88,7 @@ class SignInViewController: UIViewController {
                 guard let textField = elementsStackView.viewWithTag(node?.meta?.label?.tag ?? -999) as? UITextField else { return }
                 let password = textField.text ?? ""
                 payload["password"] = password
-            case .email, .text:
+            case .email, .text, .number:
                 guard let textField = elementsStackView.viewWithTag(node?.meta?.label?.tag ?? -999) as? UITextField else { return }
                 let text = textField.text ?? ""
                 payload["password_identifier"] = text

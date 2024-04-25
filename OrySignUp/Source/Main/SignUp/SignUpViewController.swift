@@ -31,7 +31,7 @@ class SignUpViewController: UIViewController {
     private func renderUIElements() {
         viewModel.jsonFlow?.ui?.nodes?.forEach { node in
             switch node?.attributes?.type {
-            case .email,.text, .password :
+            case .email,.text, .password, .number:
                 addTextField(node: node)
             case .checkbox:
                 addCheckBox(node: node)
@@ -111,7 +111,7 @@ class SignUpViewController: UIViewController {
                 guard let textField = elementsStackView.viewWithTag(node?.meta?.label?.tag ?? -999) as? UITextField else { return }
                 let password = textField.text ?? ""
                 payload["password"] = password
-            case .email, .text:
+            case .email, .text, .number:
                 guard let textField = elementsStackView.viewWithTag(node?.meta?.label?.tag ?? -999) as? UITextField else { return }
                 let text = textField.text ?? ""
                 viewModel.handleTextualField(components: components, text: text, traits: &traits)

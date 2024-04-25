@@ -71,6 +71,7 @@ enum AttributeType: String, Codable {
     case email = "email"
     case password = "password"
     case text = "text"
+    case number = "number"
     case checkbox = "checkbox"
     case submit = "submit"
 }

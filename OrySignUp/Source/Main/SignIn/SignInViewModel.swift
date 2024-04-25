@@ -38,7 +38,8 @@ class SignInViewModel {
                 self?.jsonFlow = flow
                 self?.delegate?.updateUI()
             }, onFailure: { error in
-                print("error", error)
+                self.errorMessage = parseError(error)
+                self.delegate?.didReceiveError()
             })
             .disposed(by: disposeBag)
     }
